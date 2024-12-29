@@ -5,9 +5,16 @@ import (
 	"fmt"
 )
 
-func validateNumber(number float64) (bool, error) {
-	if number <= 0 {
-		return false, fmt.Errorf("your number must be greater than 0, %f is unexpected", number)
+func validateNumber(number *float64) (bool, error) {
+	if *number <= 0 {
+		return false, fmt.Errorf("%v is unexpected, your number must be greater than 0", *number)
+	}
+	return true, nil
+}
+
+func limitNumber(number *float64, threshold *float64) (bool, error) {
+	if *number <= 0 || *number > *threshold{
+		return false, fmt.Errorf("%v is unexpected, your number must be greater than 0 and less than or equal %v", *number, *threshold)
 	}
 	return true, nil
 }
